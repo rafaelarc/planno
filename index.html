@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Planno - To-Do List & Planner | Organizador de Tarefas Gratuito</title>
+    <meta name="description" content="Planno é um organizador de tarefas gratuito e moderno. Gerencie suas tarefas com categorias, tags, filtros combinados, tarefas recorrentes e muito mais. 100% local e seguro.">
+    <meta name="keywords" content="to-do list, organizador de tarefas, planner, gerenciador de tarefas, produtividade, organização pessoal, tarefas, categorias, tags, filtros, JavaScript, HTML5, CSS3">
+    <meta name="author" content="Rafaela Carvalho">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Portuguese">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Planno - To-Do List & Planner | Organizador de Tarefas Gratuito">
+    <meta property="og:description" content="Organizador de tarefas moderno e gratuito. Gerencie suas tarefas com categorias, tags, filtros combinados e muito mais. 100% local e seguro.">
+    <meta property="og:url" content="https://github.com/rafaelarc/planno">
+    <meta property="og:site_name" content="Planno">
+    <meta property="og:locale" content="pt_BR">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Planno - To-Do List & Planner | Organizador de Tarefas Gratuito">
+    <meta property="twitter:description" content="Organizador de tarefas moderno e gratuito. Gerencie suas tarefas com categorias, tags, filtros combinados e muito mais. 100% local e seguro.">
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#007bff">
+    <meta name="msapplication-TileColor" content="#007bff">
+    <meta name="application-name" content="Planno">
+    <meta name="apple-mobile-web-app-title" content="Planno">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3Cpath d='M9 12.17L4.83 8l-1.42 1.41L9 15 21 3l-1.41-1.41z'/%3E%3Ccircle cx='12' cy='20' r='2'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3Cpath d='M9 12.17L4.83 8l-1.42 1.41L9 15 21 3l-1.41-1.41z'/%3E%3Ccircle cx='12' cy='20' r='2'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Planno - To-Do List & Planner",
+        "description": "Organizador de tarefas gratuito e moderno com categorias, tags, filtros combinados e tarefas recorrentes. 100% local e seguro.",
+        "url": "https://github.com/rafaelarc/planno",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Rafaela Carvalho",
+            "url": "https://github.com/rafaelarc"
+        },
+        "programmingLanguage": ["JavaScript", "HTML5", "CSS3"],
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "screenshot": "https://github.com/rafaelarc/planno/blob/main/screenshot.png",
+        "featureList": [
+            "Gerenciamento de tarefas",
+            "Categorias personalizáveis",
+            "Sistema de tags",
+            "Filtros combinados",
+            "Tarefas recorrentes",
+            "Tema claro e escuro",
+            "Backup e restauração",
+            "Armazenamento local",
+            "Design responsivo"
+        ]
+    }
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1><i class="fas fa-tasks"></i>To-Do Planner</h1>
+                    <p class="user-greeting" id="userGreeting">Bem-vindo!</p>
+                </div>
+                <div class="header-controls">
+                    <button class="nav-btn" id="guideBtn" title="Guia do Usuário">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                    <button class="nav-btn" id="settingsBtn" title="Configurações">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="add-task-btn" id="addTaskBtn">
+                        <i class="fas fa-plus"></i> Nova Tarefa
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>Filtro</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Todas</button>
+                        <button class="filter-btn" data-filter="pending">Pendentes</button>
+                        <button class="filter-btn" data-filter="completed">Concluídas</button>
+                        <button class="filter-btn" data-filter="recurring">Recorrentes</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Data</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn" data-filter="today">Hoje</button>
+                        <button class="filter-btn" data-filter="upcoming">Em Breve</button>
+                        <button class="filter-btn" data-filter="overdue">Atrasadas</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Prioridades</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn" data-filter="low">Baixa</button>
+                        <button class="filter-btn" data-filter="medium">Média</button>
+                        <button class="filter-btn" data-filter="high">Alta</button>
+                    </div>
+                </div>
+
+
+                <div class="sidebar-section">
+                    <div class="section-header">
+                        <h3>Categorias</h3>
+                        <button class="manage-categories-btn" id="manageCategoriesBtn" title="Gerenciar Categorias">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                    <div class="category-list" id="categoryList">
+                        <!-- Categories will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="section-header">
+                        <h3>Tags</h3>
+                        <button class="manage-tags-btn" id="manageTagsBtn" title="Gerenciar Tags">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                    <div class="tag-list" id="tagList">
+                        <!-- Tags will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Estatísticas</h3>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="totalTasks">0</span>
+                            <span class="stat-label">Total</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="completedTasks">0</span>
+                            <span class="stat-label">Concluídas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="pendingTasks">0</span>
+                            <span class="stat-label">Pendentes</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Task List -->
+            <section class="task-section">
+                <div class="task-header">
+                    <div class="task-title-section">
+                        <h2 id="taskSectionTitle">Todas as Tarefas</h2>
+                        <div class="active-filters" id="activeFilters" style="display: none;">
+                            <button class="clear-filters-btn" id="clearFiltersBtn" title="Limpar todos os filtros">
+                                <i class="fas fa-times"></i> Limpar Filtros
+                            </button>
+                        </div>
+                        <div class="sort-indicator" id="sortIndicator">
+                            <i class="fas fa-sort"></i>
+                            <span id="sortText">Ordenado por Data de Criação (Decrescente)</span>
+                        </div>
+                    </div>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar tarefas...">
+                    </div>
+                </div>
+
+                <div class="task-list" id="taskList">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Task Modal -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nova Tarefa</h3>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="task-form" id="taskForm">
+                <div class="form-group">
+                    <label for="taskTitle">Título da Tarefa</label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskDescription">Descrição</label>
+                    <textarea id="taskDescription" rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskCategory">Categoria</label>
+                        <select id="taskCategory">
+                            <option value="work">Trabalho</option>
+                            <option value="personal">Pessoal</option>
+                            <option value="study">Estudos</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskPriority">Prioridade</label>
+                        <select id="taskPriority">
+                            <option value="low">Baixa</option>
+                            <option value="medium">Média</option>
+                            <option value="high">Alta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Tags (máximo 3)</label>
+                    <div class="tag-selection" id="tagSelection">
+                        <!-- Tags will be dynamically loaded here -->
+                    </div>
+                    <small>Selecione até 3 tags para organizar melhor suas tarefas</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskDate">Data de Vencimento</label>
+                        <input type="date" id="taskDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskTime">Horário</label>
+                        <input type="time" id="taskTime">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="isRecurring">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Tarefa Recorrente</span>
+                    </label>
+                </div>
+
+                <div class="recurrence-options" id="recurrenceOptions" style="display: none;">
+                    <div class="form-group">
+                        <label for="recurrenceType">Tipo de Recorrência</label>
+                        <select id="recurrenceType">
+                            <option value="daily">Diária</option>
+                            <option value="weekly">Semanal</option>
+                            <option value="monthly">Mensal</option>
+                            <option value="yearly">Anual</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="weeklyOptions" style="display: none;">
+                        <label>Dias da Semana</label>
+                        <div class="weekday-checkboxes">
+                            <label class="weekday-label">
+                                <input type="checkbox" value="1" class="weekday-checkbox">
+                                <span>Seg</span>
+                            </label>
+                            <label class="weekday-label">
+                                <input type="checkbox" value="2" class="weekday-checkbox">
+                                <span>Ter</span>
+                            </label>
+                            <label class="weekday-label">
+                                <input type="checkbox" value="3" class="weekday-checkbox">
+                                <span>Qua</span>
+                            </label>
+                            <label class="weekday-label">
+                                <input type="checkbox" value="4" class="weekday-checkbox">
+                                <span>Qui</span>
+                            </label>
+                            <label class="weekday-label">
+                                <input type="checkbox" value="5" class="weekday-checkbox">
+                                <span>Sex</span>
+                            </label>
+                            <label class="weekday-label">
+                                <input type="checkbox" value="6" class="weekday-checkbox">
+                                <span>Sáb</span>
+                            </label>
+                            <label class="weekday-label">
+                                <input type="checkbox" value="0" class="weekday-checkbox">
+                                <span>Dom</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelTask">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Tarefa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Management Modal -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Gerenciar Categorias</h3>
+                <button class="close-btn" id="closeCategoryModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="category-management">
+                <div class="add-category-section">
+                    <h4>Adicionar Nova Categoria</h4>
+                    <form class="category-form" id="categoryForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="categoryName">Nome da Categoria</label>
+                                <input type="text" id="categoryName" placeholder="Ex: Projetos" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryColor">Cor</label>
+                                <input type="color" id="categoryColor" value="#007bff">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Adicionar Categoria
+                        </button>
+                    </form>
+                </div>
+
+                <div class="categories-list-section">
+                    <h4>Suas Categorias</h4>
+                    <div class="categories-management-list" id="categoriesManagementList">
+                        <!-- Categories will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tag Management Modal -->
+    <div class="modal" id="tagModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Gerenciar Tags</h3>
+                <button class="close-btn" id="closeTagModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="tag-management">
+                <div class="add-tag-section">
+                    <h4>Adicionar Nova Tag</h4>
+                    <form class="tag-form" id="tagForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tagName">Nome da Tag</label>
+                                <input type="text" id="tagName" placeholder="Ex: Urgente" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tagColor">Cor</label>
+                                <input type="color" id="tagColor" value="#dc3545">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Adicionar Tag
+                        </button>
+                    </form>
+                </div>
+
+                <div class="tags-list-section">
+                    <h4>Suas Tags</h4>
+                    <div class="tags-management-list" id="tagsManagementList">
+                        <!-- Tags will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Page -->
+    <div class="settings-page" id="settingsPage">
+        <div class="settings-container">
+            <div class="settings-header">
+                <h2><i class="fas fa-cog"></i> Configurações</h2>
+                <button class="close-settings-btn" id="closeSettingsBtn">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+
+            <div class="settings-content">
+                <!-- User Profile Section -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-user"></i> Perfil do Usuário</h3>
+                    <div class="settings-group">
+                        <label for="userName">Seu Nome</label>
+                        <input type="text" id="userName" placeholder="Digite seu nome">
+                        <small>Este nome aparecerá na saudação da página principal</small>
+                    </div>
+                </div>
+
+                <!-- Theme Customization Section -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-palette"></i> Personalização de Cores</h3>
+                    <div class="color-customization">
+                        <div class="color-group">
+                            <label for="primaryColor">Cor Principal</label>
+                            <div class="color-input-group">
+                                <input type="color" id="primaryColor" value="#007bff">
+                                <input type="text" id="primaryColorText" value="#007bff" placeholder="#007bff">
+                            </div>
+                            <small>Usada em botões, links e elementos de destaque</small>
+                        </div>
+
+                        <div class="color-group">
+                            <label for="successColor">Cor de Sucesso</label>
+                            <div class="color-input-group">
+                                <input type="color" id="successColor" value="#28a745">
+                                <input type="text" id="successColorText" value="#28a745" placeholder="#28a745">
+                            </div>
+                            <small>Usada para tarefas concluídas e ações positivas</small>
+                        </div>
+
+                        <div class="color-group">
+                            <label for="warningColor">Cor de Aviso</label>
+                            <div class="color-input-group">
+                                <input type="color" id="warningColor" value="#ffc107">
+                                <input type="text" id="warningColorText" value="#ffc107" placeholder="#ffc107">
+                            </div>
+                            <small>Usada para tarefas de hoje e alertas</small>
+                        </div>
+
+                        <div class="color-group">
+                            <label for="dangerColor">Cor de Perigo</label>
+                            <div class="color-input-group">
+                                <input type="color" id="dangerColor" value="#dc3545">
+                                <input type="text" id="dangerColorText" value="#dc3545" placeholder="#dc3545">
+                            </div>
+                            <small>Usada para tarefas atrasadas e ações de exclusão</small>
+                        </div>
+
+                        <div class="color-actions">
+                            <button class="btn btn-secondary" id="resetColorsBtn">
+                                <i class="fas fa-undo"></i> Resetar Cores
+                            </button>
+                            <button class="btn btn-primary" id="applyColorsBtn">
+                                <i class="fas fa-check"></i> Aplicar Cores
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Section -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-bell"></i> Notificações</h3>
+                    <div class="settings-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="enableNotifications">
+                            <label for="enableNotifications">Ativar notificações do navegador</label>
+                        </div>
+                        <small>Você receberá notificações quando tarefas estiverem vencendo</small>
+                        
+                        <div class="notification-settings" id="notificationSettings" style="display: none;">
+                            <div class="settings-group">
+                                <label for="notificationTime">Notificar com antecedência</label>
+                                <select id="notificationTime">
+                                    <option value="0">No momento do vencimento</option>
+                                    <option value="15">15 minutos antes</option>
+                                    <option value="30">30 minutos antes</option>
+                                    <option value="60">1 hora antes</option>
+                                    <option value="1440">1 dia antes</option>
+                                </select>
+                            </div>
+                            
+                            <div class="settings-group">
+                                <button class="btn btn-primary" id="testNotificationBtn">
+                                    <i class="fas fa-bell"></i> Testar Notificação
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Display Settings Section -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-eye"></i> Configurações de Visualização</h3>
+                    <div class="settings-group">
+                        <div class="settings-group">
+                            <label for="completedTasksDays">Mostrar tarefas concluídas dos últimos</label>
+                            <select id="completedTasksDays">
+                                <option value="7">7 dias</option>
+                                <option value="15">15 dias</option>
+                                <option value="30" selected>30 dias</option>
+                                <option value="60">60 dias</option>
+                                <option value="90">90 dias</option>
+                            </select>
+                        </div>
+                        <small>Tarefas concluídas só aparecem no filtro "Concluídas". Esta configuração controla quantos dias de histórico são exibidos para manter o feed organizado.</small>
+                    </div>
+                </div>
+
+                <!-- Sort Settings Section -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-sort"></i> Configurações de Ordenação</h3>
+                    <div class="settings-group">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sortField">Ordenar tarefas por</label>
+                                <select id="sortField">
+                                    <option value="createdAt">Data de Criação</option>
+                                    <option value="title">Título</option>
+                                    <option value="priority">Prioridade</option>
+                                    <option value="status">Status</option>
+                                    <option value="category">Categoria</option>
+                                    <option value="tags">Tags</option>
+                                    <option value="dueDate">Data de Vencimento</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sortDirection">Direção</label>
+                                <select id="sortDirection">
+                                    <option value="desc">Decrescente</option>
+                                    <option value="asc">Crescente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <small>Esta configuração define como suas tarefas são organizadas na lista principal. A ordenação é aplicada após os filtros.</small>
+                    </div>
+                </div>
+
+                <!-- Save All Settings -->
+                <div class="settings-save-section">
+                    <div class="save-actions">
+                        <button class="btn btn-primary btn-large" id="saveAllSettingsBtn">
+                            <i class="fas fa-save"></i> Salvar Todas as Configurações
+                        </button>
+                        <button class="btn btn-secondary" id="resetAllSettingsBtn">
+                            <i class="fas fa-undo"></i> Resetar para Padrão
+                        </button>
+                    </div>
+                    <small>As configurações são salvas localmente no seu navegador e persistem entre sessões.</small>
+                </div>
+
+                <!-- Data Management Section -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-database"></i> Gerenciamento de Dados</h3>
+                    <div class="data-actions">
+                        <div class="action-group">
+                            <h4>Exportar Dados</h4>
+                            <p>Baixe um arquivo com todas as suas tarefas, categorias e configurações</p>
+                            <button class="btn btn-primary" id="exportDataBtn">
+                                <i class="fas fa-download"></i> Exportar Dados
+                            </button>
+                        </div>
+
+                        <div class="action-group">
+                            <h4>Importar Dados</h4>
+                            <p>Carregue um arquivo de backup para restaurar suas tarefas</p>
+                            <div class="import-group">
+                                <input type="file" id="importFile" accept=".json" style="display: none;">
+                                <button class="btn btn-secondary" id="selectImportFileBtn">
+                                    <i class="fas fa-upload"></i> Selecionar Arquivo
+                                </button>
+                                <button class="btn btn-primary" id="importDataBtn" disabled>
+                                    <i class="fas fa-file-import"></i> Importar
+                                </button>
+                            </div>
+                            <small><strong>Importante:</strong> Use apenas arquivos JSON exportados por esta aplicação. Outros formatos não serão aceitos.</small>
+                            <small id="importFileName"></small>
+                        </div>
+
+                        <div class="action-group danger-zone">
+                            <h4>Zona de Perigo</h4>
+                            <p>⚠️ Estas ações não podem ser desfeitas</p>
+                            <button class="btn btn-danger" id="clearAllDataBtn">
+                                <i class="fas fa-trash"></i> Limpar Todos os Dados
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Info Section -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-info-circle"></i> Informações do App</h3>
+                    <div class="app-info">
+                        <p><strong>Versão:</strong> 1.0.0</p>
+                        <p><strong>Desenvolvedor:</strong> <a href="https://github.com/rafaelarc" target="_blank" rel="noopener">Rafaela Carvalho</a></p>
+                        <p><strong>Tecnologias:</strong> HTML5, CSS3, JavaScript</p>
+                        <p><strong>Armazenamento:</strong> localStorage (dados locais)</p>
+                        <p><strong>Última atualização:</strong> <span id="lastUpdate"></span></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- User Guide Modal -->
+    <div class="modal" id="guideModal">
+        <div class="modal-content guide-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-book"></i> Guia do Usuário</h2>
+                <button class="close-btn" id="closeGuideBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="guide-container">
+                    <!-- Guide Navigation -->
+                    <nav class="guide-nav">
+                        <ul class="guide-nav-list">
+                            <li><a href="#getting-started" class="guide-nav-link active" data-section="getting-started">
+                                <i class="fas fa-play-circle"></i> Começando
+                            </a></li>
+                            <li><a href="#tasks" class="guide-nav-link" data-section="tasks">
+                                <i class="fas fa-tasks"></i> Tarefas
+                            </a></li>
+                            <li><a href="#categories" class="guide-nav-link" data-section="categories">
+                                <i class="fas fa-folder"></i> Categorias
+                            </a></li>
+                            <li><a href="#tags" class="guide-nav-link" data-section="tags">
+                                <i class="fas fa-tags"></i> Tags
+                            </a></li>
+                            <li><a href="#filters" class="guide-nav-link" data-section="filters">
+                                <i class="fas fa-filter"></i> Filtros
+                            </a></li>
+                            <li><a href="#settings" class="guide-nav-link" data-section="settings">
+                                <i class="fas fa-cog"></i> Configurações
+                            </a></li>
+                            <li><a href="#privacy" class="guide-nav-link" data-section="privacy">
+                                <i class="fas fa-shield-alt"></i> Privacidade
+                            </a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- Guide Content -->
+                    <div class="guide-content">
+                        <!-- Getting Started Section -->
+                        <section id="getting-started" class="guide-section active">
+                            <h3><i class="fas fa-play-circle"></i> Começando</h3>
+                            <div class="guide-step">
+                                <h4>1. Bem-vindo ao Planno!</h4>
+                                <p>O Planno é uma ferramenta completa para gerenciar suas tarefas e organizar sua vida. Este guia irá te ajudar a aproveitar ao máximo todas as funcionalidades.</p>
+                            </div>
+                            <div class="guide-step" style="border-left-color: #007bff;">
+                                <h4><i class="fas fa-star" style="color: #007bff; margin-right: 0.5rem;"></i>2. O que o Planno pode fazer</h4>
+                                <p>O Planno oferece um conjunto completo de funcionalidades para organizar sua vida:</p>
+                                <ul>
+                                    <li><strong>Gerenciar tarefas:</strong> Criar, editar, marcar como concluídas e excluir tarefas</li>
+                                    <li><strong>Organizar por categorias:</strong> Agrupar tarefas por projetos ou áreas da vida</li>
+                                    <li><strong>Sistema de tags:</strong> Marcar tarefas com até 3 etiquetas para melhor organização</li>
+                                    <li><strong>Filtros combinados:</strong> Filtrar por categoria + tag simultaneamente (ex: "Trabalho + Urgente")</li>
+                                    <li><strong>Filtros inteligentes:</strong> Encontrar tarefas por status, data, categoria ou tags</li>
+                                    <li><strong>Busca rápida:</strong> Localizar tarefas por texto em qualquer campo</li>
+                                    <li><strong>Ordenação dinâmica:</strong> Organizar tarefas por prioridade, data, status, categoria, tags, etc.</li>
+                                    <li><strong>Configurações personalizáveis:</strong> Ajustar cores, notificações e exibição</li>
+                                    <li><strong>Backup completo:</strong> Exportar e importar todos os dados e configurações</li>
+                                    <li><strong>Guia integrado:</strong> Documentação completa dentro da aplicação</li>
+                                    <li><strong>Armazenamento local:</strong> Seus dados ficam seguros no seu dispositivo</li>
+                                </ul>
+                            </div>
+                            <div class="guide-step">
+                                <h4>3. Interface Principal</h4>
+                                <ul>
+                                    <li><strong>Barra lateral:</strong> Filtros, categorias e tags</li>
+                                    <li><strong>Lista de tarefas:</strong> Suas tarefas organizadas</li>
+                                    <li><strong>Barra superior:</strong> Botões de ação e configurações</li>
+                                </ul>
+                            </div>
+                            <div class="guide-step">
+                                <h4>4. Primeiros Passos</h4>
+                                <ol>
+                                    <li>Configure seu nome nas configurações</li>
+                                    <li>Crie suas primeiras categorias</li>
+                                    <li>Adicione algumas tarefas</li>
+                                    <li>Experimente os filtros e ordenação</li>
+                                </ol>
+                            </div>
+                        </section>
+
+                        <!-- Tasks Section -->
+                        <section id="tasks" class="guide-section">
+                            <h3><i class="fas fa-tasks"></i> Gerenciando Tarefas</h3>
+                            <div class="guide-step">
+                                <h4>Criando uma Tarefa</h4>
+                                <ol>
+                                    <li>Clique em <strong>"Nova Tarefa"</strong> no cabeçalho</li>
+                                    <li>Preencha o título da tarefa</li>
+                                    <li>Adicione uma descrição (opcional)</li>
+                                    <li>Selecione a prioridade</li>
+                                    <li>Escolha uma categoria</li>
+                                    <li>Adicione até 3 tags</li>
+                                    <li>Defina uma data de vencimento (opcional)</li>
+                                    <li>Clique em <strong>"Salvar"</strong></li>
+                                </ol>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Editando uma Tarefa</h4>
+                                <ol>
+                                    <li>Clique no ícone de <strong>edição</strong> na tarefa</li>
+                                    <li>Modifique os campos desejados</li>
+                                    <li>Clique em <strong>"Salvar"</strong></li>
+                                </ol>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Marcando como Concluída</h4>
+                                <p>Clique na <strong>caixa de seleção</strong> ao lado do título da tarefa para marcá-la como concluída.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Excluindo uma Tarefa</h4>
+                                <p>Clique no ícone de <strong>lixeira</strong> na tarefa e confirme a exclusão.</p>
+                            </div>
+                        </section>
+
+                        <!-- Categories Section -->
+                        <section id="categories" class="guide-section">
+                            <h3><i class="fas fa-folder"></i> Categorias</h3>
+                            <div class="guide-step">
+                                <h4>Criando Categorias</h4>
+                                <ol>
+                                    <li>Clique em <strong>"Gerenciar Categorias"</strong> na barra lateral</li>
+                                    <li>Digite o nome da categoria</li>
+                                    <li>Escolha uma cor</li>
+                                    <li>Clique em <strong>"Adicionar"</strong></li>
+                                </ol>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Editando Categorias</h4>
+                                <p>Na janela de gerenciamento, clique no ícone de <strong>edição</strong> da categoria e modifique os dados.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Excluindo Categorias</h4>
+                                <p>Clique no ícone de <strong>lixeira</strong>. Categorias em uso não podem ser excluídas.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Filtrando por Categoria</h4>
+                                <p>Clique em uma categoria na barra lateral para ver apenas as tarefas dessa categoria.</p>
+                            </div>
+                        </section>
+
+                        <!-- Tags Section -->
+                        <section id="tags" class="guide-section">
+                            <h3><i class="fas fa-tags"></i> Tags</h3>
+                            <div class="guide-step">
+                                <h4>Criando Tags</h4>
+                                <ol>
+                                    <li>Clique em <strong>"Gerenciar Tags"</strong> na barra lateral</li>
+                                    <li>Digite o nome da tag</li>
+                                    <li>Escolha uma cor</li>
+                                    <li>Clique em <strong>"Adicionar"</strong></li>
+                                </ol>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Adicionando Tags às Tarefas</h4>
+                                <p>Ao criar ou editar uma tarefa, selecione até <strong>3 tags</strong> na seção "Tags".</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Filtrando por Tags</h4>
+                                <p>Clique em uma tag na barra lateral para ver apenas as tarefas com essa tag.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Gerenciando Tags</h4>
+                                <p>Use a janela de gerenciamento para editar ou excluir tags. Tags em uso não podem ser excluídas.</p>
+                            </div>
+                        </section>
+
+                        <!-- Filters Section -->
+                        <section id="filters" class="guide-section">
+                            <h3><i class="fas fa-filter"></i> Filtros e Busca</h3>
+                            <div class="guide-step">
+                                <h4>Filtros por Status</h4>
+                                <ul>
+                                    <li><strong>Todas:</strong> Mostra todas as tarefas</li>
+                                    <li><strong>Pendentes:</strong> Apenas tarefas não concluídas</li>
+                                    <li><strong>Concluídas:</strong> Apenas tarefas finalizadas</li>
+                                    <li><strong>Recorrentes:</strong> Tarefas que se repetem</li>
+                                </ul>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Filtros por Data</h4>
+                                <ul>
+                                    <li><strong>Hoje:</strong> Tarefas para hoje</li>
+                                    <li><strong>Esta Semana:</strong> Tarefas da semana atual</li>
+                                    <li><strong>Este Mês:</strong> Tarefas do mês atual</li>
+                                    <li><strong>Vencidas:</strong> Tarefas atrasadas</li>
+                                </ul>
+                            </div>
+                            <div class="guide-step" style="border-left-color: #007bff;">
+                                <h4><i class="fas fa-link" style="color: #007bff; margin-right: 0.5rem;"></i>Filtros Combinados</h4>
+                                <p>Você pode combinar categoria + tag simultaneamente!</p>
+                                <ol>
+                                    <li>Clique em uma <strong>categoria</strong> (ex: "Trabalho")</li>
+                                    <li>Clique em uma <strong>tag</strong> (ex: "Urgente")</li>
+                                    <li>Resultado: Tarefas de "Trabalho" E "Urgente"</li>
+                                </ol>
+                                <p><strong>Exemplos de combinações:</strong></p>
+                                <ul>
+                                    <li>"Trabalho + Urgente" → Tarefas de trabalho urgentes</li>
+                                    <li>"Pessoal + Importante" → Tarefas pessoais importantes</li>
+                                    <li>"Estudo + Revisão" → Tarefas de estudo para revisão</li>
+                                </ul>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Indicadores Visuais</h4>
+                                <ul>
+                                    <li><strong>Título dinâmico:</strong> Mostra filtros ativos (ex: "Tarefas - Trabalho + Urgente")</li>
+                                    <li><strong>Botão "Limpar Filtros":</strong> Aparece quando há filtros ativos</li>
+                                    <li><strong>Destaque visual:</strong> Categorias e tags ativas ficam destacadas</li>
+                                </ul>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Busca por Texto</h4>
+                                <p>Use a caixa de busca para encontrar tarefas por título, descrição ou tags.</p>
+                            </div>
+                        </section>
+
+                        <!-- Settings Section -->
+                        <section id="settings" class="guide-section">
+                            <h3><i class="fas fa-cog"></i> Configurações</h3>
+                            <div class="guide-step">
+                                <h4>Informações Pessoais</h4>
+                                <p>Configure seu nome para personalizar a saudação no cabeçalho.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Personalização de Cores</h4>
+                                <p>Personalize as cores do aplicativo para combinar com seu estilo. Use o botão <strong>"Aplicar Cores"</strong> para testar.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Notificações</h4>
+                                <p>Configure lembretes diários para revisar suas tarefas.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Configurações de Exibição</h4>
+                                <p>Defina quantos dias de tarefas concluídas devem ser exibidos.</p>
+                            </div>
+                            <div class="guide-step" style="border-left-color: #28a745;">
+                                <h4><i class="fas fa-sort" style="color: #28a745; margin-right: 0.5rem;"></i>Ordenação Dinâmica</h4>
+                                <p>Configure como suas tarefas são organizadas na lista principal.</p>
+                                <ul>
+                                    <li><strong>Por data:</strong> Data de criação ou vencimento</li>
+                                    <li><strong>Por prioridade:</strong> Alta, média, baixa</li>
+                                    <li><strong>Por status:</strong> Pendentes primeiro</li>
+                                    <li><strong>Por categoria:</strong> Agrupadas por categoria</li>
+                                    <li><strong>Por tags:</strong> Agrupadas por tags</li>
+                                    <li><strong>Por título:</strong> Ordem alfabética</li>
+                                </ul>
+                                <p>Escolha também a <strong>direção</strong>: crescente ou decrescente.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Salvando Configurações</h4>
+                                <p>Use o botão <strong>"Salvar Todas as Configurações"</strong> para aplicar todas as mudanças de uma vez.</p>
+                            </div>
+                        </section>
+
+                        <!-- Privacy Section -->
+                        <section id="privacy" class="guide-section">
+                            <h3><i class="fas fa-shield-alt"></i> Privacidade e Dados</h3>
+                            <div class="guide-step">
+                                <h4>Armazenamento Local</h4>
+                                <p>Todos os seus dados são armazenados <strong>localmente</strong> no seu navegador. Nada é enviado para servidores externos.</p>
+                            </div>
+                            <div class="guide-step" style="border-left-color: #28a745;">
+                                <h4><i class="fas fa-download" style="color: #28a745; margin-right: 0.5rem;"></i>✅ Backup dos Dados</h4>
+                                <p><strong>RECOMENDADO:</strong> Use a função <strong>"Exportar Dados"</strong> nas configurações para fazer backup das suas tarefas, categorias e configurações.</p>
+                                <p>Faça backup <strong>regularmente</strong> para não perder seus dados!</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Restaurando Dados</h4>
+                                <p>Use <strong>"Importar Dados"</strong> para restaurar um backup anterior.</p>
+                            </div>
+                            <div class="guide-step">
+                                <h4>Segurança</h4>
+                                <p>Seus dados ficam seguros no seu dispositivo. Apenas você tem acesso a eles.</p>
+                            </div>
+                            <div class="guide-step" style="border-left-color: #dc3545;">
+                                <h4><i class="fas fa-exclamation-triangle" style="color: #dc3545; margin-right: 0.5rem;"></i>⚠️ RESPONSABILIDADE DO USUÁRIO</h4>
+                                <p><strong>IMPORTANTE:</strong> Você é <strong>100% responsável</strong> pelos seus dados! Como o Planno armazena tudo localmente no seu navegador, <strong>apenas você</strong> tem controle sobre eles.</p>
+                                <ul>
+                                    <li>Se você limpar o cache do navegador, <strong>perderá todos os dados</strong></li>
+                                    <li>Se trocar de navegador, <strong>perderá todos os dados</strong></li>
+                                    <li>Se reinstalar o sistema, <strong>perderá todos os dados</strong></li>
+                                    <li>Se o navegador corromper os dados, <strong>perderá tudo</strong></li>
+                                </ul>
+                            </div>
+                            <div class="guide-step" style="border-left-color: #dc3545;">
+                                <h4><i class="fas fa-trash-alt" style="color: #dc3545; margin-right: 0.5rem;"></i>🚨 CUIDADO: Limpeza de Dados</h4>
+                                <p><strong>ATENÇÃO:</strong> A função <strong>"Limpar Todos os Dados"</strong> é <strong>IRREVERSÍVEL</strong>!</p>
+                                <ul>
+                                    <li>Você <strong>perderá TODAS</strong> as suas tarefas</li>
+                                    <li>Você <strong>perderá TODAS</strong> as suas categorias</li>
+                                    <li>Você <strong>perderá TODAS</strong> as suas tags</li>
+                                    <li>Você <strong>perderá TODAS</strong> as suas configurações</li>
+                                    <li><strong>NÃO HÁ COMO RECUPERAR</strong> após clicar em "Limpar"</li>
+                                </ul>
+                                <p style="background-color: #fff3cd; padding: 1rem; border-radius: 6px; border: 1px solid #ffeaa7; margin-top: 1rem;">
+                                    <strong>💡 DICA:</strong> Sempre faça backup antes de limpar os dados!
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">
+                Desenvolvido com <span class="heart">❤️</span> e JavaScript.
+            </p>
+            <a href="https://www.buymeacoffee.com/rafaelarc" target="_blank" rel="noopener noreferrer" class="coffee-link">
+                <i class="fas fa-coffee"></i>
+                Me compre um café
+            </a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
