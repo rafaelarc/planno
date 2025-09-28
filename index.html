@@ -31,6 +31,7 @@
     <meta name="msapplication-TileColor" content="#007bff">
     <meta name="application-name" content="Planno">
     <meta name="apple-mobile-web-app-title" content="Planno">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
@@ -83,10 +84,13 @@
         <header class="header">
             <div class="header-content">
                 <div class="header-title">
-                    <h1><i class="fas fa-tasks"></i>To-Do Planner</h1>
+                    <h1><i class="fas fa-tasks"></i>Planno</h1>
                     <p class="user-greeting" id="userGreeting">Bem-vindo!</p>
                 </div>
                 <div class="header-controls">
+                    <button class="sidebar-toggle" id="sidebarToggle" title="Alternar Sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
                     <button class="nav-btn" id="guideBtn" title="Guia do Usuário">
                         <i class="fas fa-question-circle"></i>
                     </button>
@@ -103,35 +107,43 @@
             </div>
         </header>
 
+        <!-- Sidebar Overlay (Mobile) -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
         <!-- Main Content -->
         <main class="main-content">
             <!-- Sidebar -->
-            <aside class="sidebar">
+            <aside class="sidebar" id="sidebar">
+                <!-- Close button for mobile -->
+                <button class="sidebar-close-btn" id="sidebarCloseBtn" title="Fechar Sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+                
                 <div class="sidebar-section">
                     <h3>Filtro</h3>
                     <div class="filter-buttons">
-                        <button class="filter-btn active" data-filter="all">Todas</button>
-                        <button class="filter-btn" data-filter="pending">Pendentes</button>
-                        <button class="filter-btn" data-filter="completed">Concluídas</button>
-                        <button class="filter-btn" data-filter="recurring">Recorrentes</button>
+                        <button class="filter-btn active" data-filter="all" data-icon="&#xf0ca;" data-tooltip="Todas">Todas</button>
+                        <button class="filter-btn" data-filter="pending" data-icon="&#xf017;" data-tooltip="Pendentes">Pendentes</button>
+                        <button class="filter-btn" data-filter="completed" data-icon="&#xf00c;" data-tooltip="Concluídas">Concluídas</button>
+                        <button class="filter-btn" data-filter="recurring" data-icon="&#xf021;" data-tooltip="Recorrentes">Recorrentes</button>
                     </div>
                 </div>
 
                 <div class="sidebar-section">
                     <h3>Data</h3>
                     <div class="filter-buttons">
-                        <button class="filter-btn" data-filter="today">Hoje</button>
-                        <button class="filter-btn" data-filter="upcoming">Em Breve</button>
-                        <button class="filter-btn" data-filter="overdue">Atrasadas</button>
+                        <button class="filter-btn" data-filter="today" data-icon="&#xf073;" data-tooltip="Hoje">Hoje</button>
+                        <button class="filter-btn" data-filter="upcoming" data-icon="&#xf133;" data-tooltip="Em Breve">Em Breve</button>
+                        <button class="filter-btn" data-filter="overdue" data-icon="&#xf071;" data-tooltip="Atrasadas">Atrasadas</button>
                     </div>
                 </div>
 
                 <div class="sidebar-section">
                     <h3>Prioridades</h3>
                     <div class="filter-buttons">
-                        <button class="filter-btn" data-filter="low">Baixa</button>
-                        <button class="filter-btn" data-filter="medium">Média</button>
-                        <button class="filter-btn" data-filter="high">Alta</button>
+                        <button class="filter-btn" data-filter="low" data-icon="&#xf0c8;" data-tooltip="Baixa">Baixa</button>
+                        <button class="filter-btn" data-filter="medium" data-icon="&#xf0c9;" data-tooltip="Média">Média</button>
+                        <button class="filter-btn" data-filter="high" data-icon="&#xf0ca;" data-tooltip="Alta">Alta</button>
                     </div>
                 </div>
 

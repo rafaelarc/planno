@@ -21,6 +21,7 @@ class TodoApp {
         this.notificationTime = parseInt(localStorage.getItem('notificationTime')) || 0;
         this.notificationCheckInterval = null;
         this.completedTasksDays = parseInt(localStorage.getItem('completedTasksDays')) || 30;
+        this.sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
         this.recurrenceTypes = [
             { value: 'daily', label: 'Diária' },
             { value: 'weekly', label: 'Semanal' },
@@ -46,6 +47,88 @@ class TodoApp {
         this.renderTags();
         this.updateSortUI();
         this.updateStats();
+        this.initSidebar();
+    }
+
+    // Sidebar Management
+    initSidebar() {
+        this.sidebar = document.getElementById('sidebar');
+        this.sidebarToggle = document.getElementById('sidebarToggle');
+        this.sidebarOverlay = document.getElementById('sidebarOverlay');
+        this.sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+        
+        // Apply saved state
+        this.applySidebarState();
+        
+        // Add overlay event listener
+        this.sidebarOverlay.addEventListener('click', () => {
+            this.closeSidebar();
+        });
+        
+        // Add close button event listener
+        this.sidebarCloseBtn.addEventListener('click', () => {
+            this.closeSidebar();
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            this.handleResize();
+        });
+    }
+    
+    toggleSidebar() {
+        if (window.innerWidth <= 768) {
+            // Mobile: toggle overlay
+            this.sidebar.classList.toggle('show');
+            this.sidebarOverlay.classList.toggle('show');
+            
+            // Hide/show toggle button based on sidebar state
+            if (this.sidebar.classList.contains('show')) {
+                this.sidebarToggle.style.display = 'none';
+            } else {
+                this.sidebarToggle.style.display = 'flex';
+            }
+        } else {
+            // Desktop: toggle collapsed state
+            this.sidebarCollapsed = !this.sidebarCollapsed;
+            this.applySidebarState();
+            this.saveSidebarState();
+        }
+    }
+    
+    closeSidebar() {
+        if (window.innerWidth <= 768) {
+            this.sidebar.classList.remove('show');
+            this.sidebarOverlay.classList.remove('show');
+            this.sidebarToggle.style.display = 'flex';
+        }
+    }
+    
+    applySidebarState() {
+        if (window.innerWidth <= 768) {
+            // Mobile: always start closed
+            this.sidebar.classList.remove('show');
+            this.sidebarOverlay.classList.remove('show');
+            this.sidebarToggle.style.display = 'flex';
+        } else {
+            // Desktop: apply saved state
+            if (this.sidebarCollapsed) {
+                this.sidebar.classList.add('collapsed');
+                this.sidebarToggle.style.display = 'flex';
+            } else {
+                this.sidebar.classList.remove('collapsed');
+                this.sidebarToggle.style.display = 'none';
+            }
+        }
+    }
+    
+    saveSidebarState() {
+        localStorage.setItem('sidebarCollapsed', this.sidebarCollapsed);
+    }
+    
+    handleResize() {
+        // Reset sidebar state on resize
+        this.applySidebarState();
     }
 
     // Theme Management
@@ -415,6 +498,12 @@ class TodoApp {
 
     // Category Management
     addCategory(categoryData) {
+        // Check category limit (5 total including defaults)
+        if (this.categories.length >= 5) {
+            alert('Limite de 5 categorias atingido. Exclua uma categoria existente para criar uma nova.');
+            return false;
+        }
+
         const category = {
             id: this.generateId(),
             name: categoryData.name.trim(),
@@ -426,6 +515,15 @@ class TodoApp {
         this.saveCategories();
         this.renderCategories();
         this.updateCategorySelects();
+        this.updateCategoryFormState();
+        
+        // Update category management modal if it's open
+        const categoryModal = document.getElementById('categoryModal');
+        if (categoryModal && categoryModal.classList.contains('show')) {
+            this.renderCategoryManagement();
+        }
+        
+        return true;
     }
 
     updateCategory(categoryId, categoryData) {
@@ -436,6 +534,12 @@ class TodoApp {
             this.renderCategories();
             this.updateCategorySelects();
             this.renderTasks(); // Re-render tasks to update category colors
+            
+            // Update category management modal if it's open
+            const categoryModal = document.getElementById('categoryModal');
+            if (categoryModal && categoryModal.classList.contains('show')) {
+                this.renderCategoryManagement();
+            }
         }
     }
 
@@ -451,6 +555,14 @@ class TodoApp {
         this.saveCategories();
         this.renderCategories();
         this.updateCategorySelects();
+        this.updateCategoryFormState();
+        
+        // Update category management modal if it's open
+        const categoryModal = document.getElementById('categoryModal');
+        if (categoryModal && categoryModal.classList.contains('show')) {
+            this.renderCategoryManagement();
+        }
+        
         return true;
     }
 
@@ -462,8 +574,48 @@ class TodoApp {
         return this.tasks.filter(task => task.category === categoryId && !task.completed).length;
     }
 
+    updateCategoryFormState() {
+        const addButton = document.querySelector('#categoryForm button[type="submit"]');
+        const categoryCount = this.categories.length;
+        
+        if (addButton) {
+            if (categoryCount >= 5) {
+                addButton.disabled = true;
+                addButton.innerHTML = '<i class="fas fa-ban"></i> Limite Atingido (5/5)';
+                addButton.classList.add('disabled');
+            } else {
+                addButton.disabled = false;
+                addButton.innerHTML = `<i class="fas fa-plus"></i> Adicionar Categoria (${categoryCount}/5)`;
+                addButton.classList.remove('disabled');
+            }
+        }
+    }
+
+    updateTagFormState() {
+        const addButton = document.querySelector('#tagForm button[type="submit"]');
+        const tagCount = this.tags.length;
+        
+        if (addButton) {
+            if (tagCount >= 5) {
+                addButton.disabled = true;
+                addButton.innerHTML = '<i class="fas fa-ban"></i> Limite Atingido (5/5)';
+                addButton.classList.add('disabled');
+            } else {
+                addButton.disabled = false;
+                addButton.innerHTML = `<i class="fas fa-plus"></i> Adicionar Tag (${tagCount}/5)`;
+                addButton.classList.remove('disabled');
+            }
+        }
+    }
+
     // Tag Management
     addTag(tagData) {
+        // Check tag limit (5 total including defaults)
+        if (this.tags.length >= 5) {
+            alert('Limite de 5 tags atingido. Exclua uma tag existente para criar uma nova.');
+            return false;
+        }
+
         const tag = {
             id: this.generateId(),
             name: tagData.name.trim(),
@@ -475,6 +627,15 @@ class TodoApp {
         this.saveTags();
         this.renderTags();
         this.updateTagSelects();
+        this.updateTagFormState();
+        
+        // Update tag management modal if it's open
+        const tagModal = document.getElementById('tagModal');
+        if (tagModal && tagModal.classList.contains('show')) {
+            this.renderTagManagement();
+        }
+        
+        return true;
     }
 
     updateTag(tagId, tagData) {
@@ -485,6 +646,12 @@ class TodoApp {
             this.renderTags();
             this.updateTagSelects();
             this.renderTasks(); // Re-render tasks to update tag colors
+            
+            // Update tag management modal if it's open
+            const tagModal = document.getElementById('tagModal');
+            if (tagModal && tagModal.classList.contains('show')) {
+                this.renderTagManagement();
+            }
         }
     }
 
@@ -500,6 +667,14 @@ class TodoApp {
         this.saveTags();
         this.renderTags();
         this.updateTagSelects();
+        this.updateTagFormState();
+        
+        // Update tag management modal if it's open
+        const tagModal = document.getElementById('tagModal');
+        if (tagModal && tagModal.classList.contains('show')) {
+            this.renderTagManagement();
+        }
+        
         return true;
     }
 
@@ -1284,6 +1459,7 @@ class TodoApp {
     renderCategories() {
         const categoryList = document.getElementById('categoryList');
         categoryList.innerHTML = this.categories.map(category => this.createCategoryHTML(category)).join('');
+        this.updateCategoryFormState();
     }
 
     renderTags() {
@@ -1291,6 +1467,7 @@ class TodoApp {
         if (tagList) {
             tagList.innerHTML = this.tags.map(tag => this.createTagHTML(tag)).join('');
         }
+        this.updateTagFormState();
     }
 
     createCategoryHTML(category) {
@@ -1299,6 +1476,7 @@ class TodoApp {
         return `
             <div class="category-item ${isActive ? 'active' : ''}" 
                  data-category-id="${category.id}" 
+                 data-category-name="${this.escapeHtml(category.name)}"
                  onclick="app.filterByCategory('${category.id}')">
                 <span class="category-color" style="background-color: ${category.color};"></span>
                 <span>${this.escapeHtml(category.name)}</span>
@@ -1313,6 +1491,7 @@ class TodoApp {
         return `
             <div class="tag-item ${isActive ? 'active' : ''}" 
                  data-tag-id="${tag.id}" 
+                 data-tag-name="${this.escapeHtml(tag.name)}"
                  onclick="app.filterByTag('${tag.id}')">
                 <span class="tag-color" style="background-color: ${tag.color};"></span>
                 <span>${this.escapeHtml(tag.name)}</span>
@@ -1724,6 +1903,11 @@ class TodoApp {
 
     // Event Handlers
     setupEventListeners() {
+        // Sidebar toggle
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+            this.toggleSidebar();
+        });
+
         // Theme toggle
         document.getElementById('themeToggle').addEventListener('click', () => {
             this.toggleTheme();
@@ -2334,11 +2518,13 @@ class TodoApp {
             return;
         }
         
-        this.addCategory({ name, color });
+        const success = this.addCategory({ name, color });
         
-        // Reset form
-        document.getElementById('categoryForm').reset();
-        document.getElementById('categoryColor').value = '#007bff';
+        if (success) {
+            // Reset form only if category was successfully added
+            document.getElementById('categoryForm').reset();
+            document.getElementById('categoryColor').value = '#007bff';
+        }
     }
 
     handleTagFormSubmit(e) {
@@ -2362,11 +2548,13 @@ class TodoApp {
             return;
         }
         
-        this.addTag({ name, color });
+        const success = this.addTag({ name, color });
         
-        // Reset form
-        document.getElementById('tagForm').reset();
-        document.getElementById('tagColor').value = '#dc3545';
+        if (success) {
+            // Reset form only if tag was successfully added
+            document.getElementById('tagForm').reset();
+            document.getElementById('tagColor').value = '#dc3545';
+        }
     }
 
     // Public methods for HTML onclick handlers
