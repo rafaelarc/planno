@@ -1,0 +1,272 @@
+/* Form Styles */
+.task-form {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Tag Selection Styles */
+.tag-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    min-height: 60px;
+}
+
+.tag-checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tag-checkbox {
+    display: none;
+}
+
+.tag-checkbox-text {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.tag-checkbox:checked + .tag-checkbox-text {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.tag-checkbox-text:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+/* Recurring Task Styles */
+.checkbox-label {
+    display: flex !important;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    gap: 8px;
+    white-space: nowrap;
+    width: auto !important;
+}
+
+/* Override form-group styles for checkbox */
+.form-group:has(.checkbox-label) {
+    margin-bottom: 1rem;
+    width: auto !important;
+    display: block !important;
+}
+
+.form-group:has(.checkbox-label) label {
+    display: flex !important;
+    margin-bottom: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+}
+
+.checkbox-text {
+    margin-left: 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+    font-weight: 500;
+    display: inline;
+    white-space: nowrap;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+    background-color: var(--bg-primary);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-label:hover .checkmark {
+    border-color: var(--accent-primary);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.recurrence-options {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.weekday-checkboxes {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.weekday-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: var(--bg-primary);
+    min-width: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.weekday-label:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+}
+
+.weekday-label span {
+    pointer-events: none;
+    user-select: none;
+}
+
+.weekday-label input[type="checkbox"] {
+    display: none;
+}
+
+.weekday-label input[type="checkbox"]:checked + span {
+    color: white;
+    font-weight: bold;
+}
+
+.weekday-label.checked {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+/* Dark theme adjustments for recurring options */
+[data-theme="dark"] .recurrence-options {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .weekday-label {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .weekday-label:hover {
+    background-color: var(--bg-primary);
+    border-color: var(--accent-primary);
+}
+
+[data-theme="dark"] .weekday-label.checked {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+[data-theme="dark"] .checkbox-label .checkmark {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .checkbox-label:hover .checkmark {
+    border-color: var(--accent-primary);
+}
+
+[data-theme="dark"] .checkbox-text {
+    color: var(--text-primary);
+}

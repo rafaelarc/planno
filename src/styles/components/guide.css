@@ -1,0 +1,300 @@
+/* User Guide Modal */
+.guide-modal {
+    max-width: 1000px;
+    width: 95%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+/* Responsive Guide Modal */
+@media (max-width: 768px) {
+    .guide-modal {
+        width: 94%;
+        max-height: 90vh;
+        margin: 1.5rem;
+    }
+}
+
+.guide-container {
+    display: flex;
+    height: 100%;
+    gap: 2rem;
+}
+
+/* Responsive Guide Container */
+@media (max-width: 768px) {
+    .guide-container {
+        flex-direction: column;
+        gap: 0.75rem;
+        height: auto;
+        max-height: calc(90vh - 4rem);
+    }
+}
+
+.guide-nav {
+    flex: 0 0 250px;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+/* Responsive Guide Navigation */
+@media (max-width: 768px) {
+    .guide-nav {
+        flex: none;
+        max-height: 120px;
+        order: 1;
+        border-radius: 6px;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    
+    .guide-nav-list {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        padding: 0;
+        margin: 0;
+        min-width: max-content;
+    }
+    
+    .guide-nav-list li {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+}
+
+.guide-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guide-nav-list li {
+    margin-bottom: 0.5rem;
+}
+
+.guide-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+/* Responsive Guide Navigation Links */
+@media (max-width: 768px) {
+    .guide-nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        margin-bottom: 0;
+        white-space: nowrap;
+        min-width: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 20px;
+        background-color: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        transition: all 0.2s ease;
+    }
+    
+    .guide-nav-link:hover {
+        background-color: var(--bg-primary);
+        border-color: var(--accent-primary);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px var(--shadow);
+    }
+    
+    .guide-nav-link.active {
+        background-color: var(--accent-primary);
+        color: white;
+        border-color: var(--accent-primary);
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    }
+    
+    .guide-nav-link i {
+        margin-right: 0.3rem;
+        width: 12px;
+        font-size: 0.7rem;
+    }
+    
+    .guide-nav-list li {
+        margin-bottom: 0;
+    }
+}
+
+.guide-nav-link:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.guide-nav-link.active {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+.guide-nav-link i {
+    margin-right: 0.75rem;
+    width: 16px;
+    text-align: center;
+}
+
+.guide-content {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 70vh;
+    padding-right: 0.5rem;
+}
+
+/* Responsive Guide Content */
+@media (max-width: 768px) {
+    .guide-content {
+        flex: 1;
+        max-height: calc(90vh - 160px);
+        order: 2;
+        padding-right: 0;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+
+.guide-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.guide-section.active {
+    display: block;
+}
+
+.guide-section h3 {
+    color: var(--accent-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.guide-section h3 i {
+    margin-right: 0.5rem;
+}
+
+.guide-step {
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--accent-primary);
+}
+
+/* Responsive Guide Steps */
+@media (max-width: 768px) {
+    .guide-step {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        border-radius: 6px;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    
+    .guide-step h4 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .guide-step p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+    }
+    
+    .guide-step ul, .guide-step ol {
+        font-size: 0.9rem;
+        padding-left: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .guide-step li {
+        margin-bottom: 0.25rem;
+    }
+}
+
+.guide-step h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.guide-step p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.guide-step ul, .guide-step ol {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding-left: 1.5rem;
+}
+
+.guide-step li {
+    margin-bottom: 0.5rem;
+}
+
+.guide-step strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Guide Scrollbar */
+.guide-content::-webkit-scrollbar,
+.guide-nav::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.guide-content::-webkit-scrollbar-track,
+.guide-nav::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+}
+
+.guide-content::-webkit-scrollbar-thumb,
+.guide-nav::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.guide-content::-webkit-scrollbar-thumb:hover,
+.guide-nav::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* Mobile Navigation Scrollbar */
+@media (max-width: 768px) {
+    .guide-nav::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .guide-nav::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    .guide-nav::-webkit-scrollbar-thumb {
+        background: var(--accent-primary);
+        border-radius: 2px;
+    }
+}

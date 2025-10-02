@@ -1,0 +1,137 @@
+/* Responsive Design */
+
+/* Mobile Responsiveness for Management Modals */
+@media (max-width: 768px) {
+    .pagination-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+        margin: 12px 0;
+    }
+    
+    .pagination-btn i {
+        font-size: 11px;
+    }
+    
+    .category-management,
+    .tag-management {
+        padding: 1rem;
+    }
+    
+    .management-item {
+        padding: 0.5rem;
+    }
+    
+    .management-item-info {
+        gap: 0.5rem;
+    }
+    
+    .management-item-color {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .management-item-text {
+        font-size: 0.9rem;
+    }
+    
+    .management-item-count {
+        font-size: 0.8rem;
+    }
+    
+    .management-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .sidebar {
+        width: 280px;
+        order: unset;
+    }
+    
+    .task-section {
+        order: unset;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .task-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .task-title-section {
+        text-align: center;
+    }
+    
+    .search-box input {
+        width: 100%;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .save-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-large {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .task-item {
+        padding: 1rem;
+    }
+    
+    .task-actions {
+        position: static;
+        margin-top: 1rem;
+        justify-content: flex-end;
+    }
+}
+
+/* Footer Responsive */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .footer-text {
+        font-size: 0.85rem;
+    }
+    
+    .coffee-link {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.75rem;
+    }
+}

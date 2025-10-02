@@ -7,11 +7,7 @@
     <!-- SEO Meta Tags -->
     <title>Planno - To-Do List & Planner | Organizador de Tarefas Gratuito</title>
     <meta name="description" content="Planno é um organizador de tarefas gratuito e moderno. Gerencie suas tarefas com categorias, tags, filtros combinados, tarefas recorrentes e muito mais. 100% local e seguro.">
-    <meta name="keywords" content="to-do list, organizador de tarefas, planner, gerenciador de tarefas, produtividade, organização pessoal, tarefas, categorias, tags, filtros, JavaScript, HTML5, CSS3">
     <meta name="author" content="Rafaela Carvalho">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="Portuguese">
-    <meta name="revisit-after" content="7 days">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -31,14 +27,14 @@
     <meta name="msapplication-TileColor" content="#007bff">
     <meta name="application-name" content="Planno">
     <meta name="apple-mobile-web-app-title" content="Planno">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3Cpath d='M9 12.17L4.83 8l-1.42 1.41L9 15 21 3l-1.41-1.41z'/%3E%3Ccircle cx='12' cy='20' r='2'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3Cpath d='M9 12.17L4.83 8l-1.42 1.41L9 15 21 3l-1.41-1.41z'/%3E%3Ccircle cx='12' cy='20' r='2'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="icons/planno-icon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="src/styles/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <!-- Structured Data (JSON-LD) -->
@@ -80,7 +76,6 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Header -->
         <header class="header">
             <div class="header-content">
                 <div class="header-title">
@@ -112,9 +107,7 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Sidebar -->
             <aside class="sidebar" id="sidebar">
-                <!-- Close button for mobile -->
                 <button class="sidebar-close-btn" id="sidebarCloseBtn" title="Fechar Sidebar">
                     <i class="fas fa-times"></i>
                 </button>
@@ -123,7 +116,6 @@
                     <h3>Filtro</h3>
                     <div class="filter-buttons">
                         <button class="filter-btn active" data-filter="all" data-icon="&#xf0ca;" data-tooltip="Todas">Todas</button>
-                        <button class="filter-btn" data-filter="pending" data-icon="&#xf017;" data-tooltip="Pendentes">Pendentes</button>
                         <button class="filter-btn" data-filter="completed" data-icon="&#xf00c;" data-tooltip="Concluídas">Concluídas</button>
                         <button class="filter-btn" data-filter="recurring" data-icon="&#xf021;" data-tooltip="Recorrentes">Recorrentes</button>
                     </div>
@@ -156,7 +148,6 @@
                         </button>
                     </div>
                     <div class="category-list" id="categoryList">
-                        <!-- Categories will be dynamically loaded here -->
                     </div>
                 </div>
 
@@ -168,7 +159,6 @@
                         </button>
                     </div>
                     <div class="tag-list" id="tagList">
-                        <!-- Tags will be dynamically loaded here -->
                     </div>
                 </div>
 
@@ -191,7 +181,6 @@
                 </div>
             </aside>
 
-            <!-- Task List -->
             <section class="task-section">
                 <div class="task-header">
                     <div class="task-title-section">
@@ -208,12 +197,12 @@
                     </div>
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Buscar tarefas...">
+                        <label for="searchInput" class="sr-only">Buscar tarefas</label>
+                        <input type="text" id="searchInput" name="search" placeholder="Buscar tarefas..." autocomplete="off">
                     </div>
                 </div>
 
                 <div class="task-list" id="taskList">
-                    <!-- Tasks will be dynamically added here -->
                 </div>
             </section>
         </main>
@@ -231,18 +220,18 @@
             <form class="task-form" id="taskForm">
                 <div class="form-group">
                     <label for="taskTitle">Título da Tarefa</label>
-                    <input type="text" id="taskTitle" required>
+                    <input type="text" id="taskTitle" name="title" required autocomplete="off">
                 </div>
                 
                 <div class="form-group">
                     <label for="taskDescription">Descrição</label>
-                    <textarea id="taskDescription" rows="3"></textarea>
+                    <textarea id="taskDescription" name="description" rows="3" autocomplete="off"></textarea>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="taskCategory">Categoria</label>
-                        <select id="taskCategory">
+                        <select id="taskCategory" name="category">
                             <option value="work">Trabalho</option>
                             <option value="personal">Pessoal</option>
                             <option value="study">Estudos</option>
@@ -251,7 +240,7 @@
                     
                     <div class="form-group">
                         <label for="taskPriority">Prioridade</label>
-                        <select id="taskPriority">
+                        <select id="taskPriority" name="priority">
                             <option value="low">Baixa</option>
                             <option value="medium">Média</option>
                             <option value="high">Alta</option>
@@ -260,9 +249,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Tags (máximo 3)</label>
-                    <div class="tag-selection" id="tagSelection">
-                        <!-- Tags will be dynamically loaded here -->
+                    <label id="tagSelectionLabel">Tags (máximo 3)</label>
+                    <div class="tag-selection" id="tagSelection" role="group" aria-labelledby="tagSelectionLabel">
                     </div>
                     <small>Selecione até 3 tags para organizar melhor suas tarefas</small>
                 </div>
@@ -270,18 +258,18 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="taskDate">Data de Vencimento</label>
-                        <input type="date" id="taskDate">
+                        <input type="date" id="taskDate" name="dueDate">
                     </div>
                     
                     <div class="form-group">
                         <label for="taskTime">Horário</label>
-                        <input type="time" id="taskTime">
+                        <input type="time" id="taskTime" name="dueTime">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="checkbox-label">
-                        <input type="checkbox" id="isRecurring">
+                        <input type="checkbox" id="isRecurring" name="isRecurring">
                         <span class="checkmark"></span>
                         <span class="checkbox-text">Tarefa Recorrente</span>
                     </label>
@@ -290,7 +278,7 @@
                 <div class="recurrence-options" id="recurrenceOptions" style="display: none;">
                     <div class="form-group">
                         <label for="recurrenceType">Tipo de Recorrência</label>
-                        <select id="recurrenceType">
+                        <select id="recurrenceType" name="recurrenceType">
                             <option value="daily">Diária</option>
                             <option value="weekly">Semanal</option>
                             <option value="monthly">Mensal</option>
@@ -299,34 +287,34 @@
                     </div>
                     
                     <div class="form-group" id="weeklyOptions" style="display: none;">
-                        <label>Dias da Semana</label>
-                        <div class="weekday-checkboxes">
-                            <label class="weekday-label">
-                                <input type="checkbox" value="1" class="weekday-checkbox">
+                        <label id="weekdayLabel">Dias da Semana</label>
+                        <div class="weekday-checkboxes" role="group" aria-labelledby="weekdayLabel">
+                            <label class="weekday-label" for="weekday-1">
+                                <input type="checkbox" id="weekday-1" value="1" class="weekday-checkbox" name="weekdays">
                                 <span>Seg</span>
                             </label>
-                            <label class="weekday-label">
-                                <input type="checkbox" value="2" class="weekday-checkbox">
+                            <label class="weekday-label" for="weekday-2">
+                                <input type="checkbox" id="weekday-2" value="2" class="weekday-checkbox" name="weekdays">
                                 <span>Ter</span>
                             </label>
-                            <label class="weekday-label">
-                                <input type="checkbox" value="3" class="weekday-checkbox">
+                            <label class="weekday-label" for="weekday-3">
+                                <input type="checkbox" id="weekday-3" value="3" class="weekday-checkbox" name="weekdays">
                                 <span>Qua</span>
                             </label>
-                            <label class="weekday-label">
-                                <input type="checkbox" value="4" class="weekday-checkbox">
+                            <label class="weekday-label" for="weekday-4">
+                                <input type="checkbox" id="weekday-4" value="4" class="weekday-checkbox" name="weekdays">
                                 <span>Qui</span>
                             </label>
-                            <label class="weekday-label">
-                                <input type="checkbox" value="5" class="weekday-checkbox">
+                            <label class="weekday-label" for="weekday-5">
+                                <input type="checkbox" id="weekday-5" value="5" class="weekday-checkbox" name="weekdays">
                                 <span>Sex</span>
                             </label>
-                            <label class="weekday-label">
-                                <input type="checkbox" value="6" class="weekday-checkbox">
+                            <label class="weekday-label" for="weekday-6">
+                                <input type="checkbox" id="weekday-6" value="6" class="weekday-checkbox" name="weekdays">
                                 <span>Sáb</span>
                             </label>
-                            <label class="weekday-label">
-                                <input type="checkbox" value="0" class="weekday-checkbox">
+                            <label class="weekday-label" for="weekday-0">
+                                <input type="checkbox" id="weekday-0" value="0" class="weekday-checkbox" name="weekdays">
                                 <span>Dom</span>
                             </label>
                         </div>
@@ -357,11 +345,11 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="categoryName">Nome da Categoria</label>
-                                <input type="text" id="categoryName" placeholder="Ex: Projetos" required>
+                                <input type="text" id="categoryName" name="categoryName" placeholder="Ex: Projetos" required autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="categoryColor">Cor</label>
-                                <input type="color" id="categoryColor" value="#007bff">
+                                <input type="color" id="categoryColor" name="categoryColor" value="#007bff">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">
@@ -373,7 +361,6 @@
                 <div class="categories-list-section">
                     <h4>Suas Categorias</h4>
                     <div class="categories-management-list" id="categoriesManagementList">
-                        <!-- Categories will be dynamically loaded here -->
                     </div>
                 </div>
             </div>
@@ -396,11 +383,11 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="tagName">Nome da Tag</label>
-                                <input type="text" id="tagName" placeholder="Ex: Urgente" required>
+                                <input type="text" id="tagName" name="tagName" placeholder="Ex: Urgente" required autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="tagColor">Cor</label>
-                                <input type="color" id="tagColor" value="#dc3545">
+                                <input type="color" id="tagColor" name="tagColor" value="#dc3545">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">
@@ -412,7 +399,6 @@
                 <div class="tags-list-section">
                     <h4>Suas Tags</h4>
                     <div class="tags-management-list" id="tagsManagementList">
-                        <!-- Tags will be dynamically loaded here -->
                     </div>
                 </div>
             </div>
@@ -430,25 +416,23 @@
             </div>
 
             <div class="settings-content">
-                <!-- User Profile Section -->
                 <div class="settings-section">
                     <h3><i class="fas fa-user"></i> Perfil do Usuário</h3>
                     <div class="settings-group">
                         <label for="userName">Seu Nome</label>
-                        <input type="text" id="userName" placeholder="Digite seu nome">
+                        <input type="text" id="userName" name="userName" placeholder="Digite seu nome" autocomplete="name">
                         <small>Este nome aparecerá na saudação da página principal</small>
                     </div>
                 </div>
 
-                <!-- Theme Customization Section -->
                 <div class="settings-section">
                     <h3><i class="fas fa-palette"></i> Personalização de Cores</h3>
                     <div class="color-customization">
                         <div class="color-group">
                             <label for="primaryColor">Cor Principal</label>
                             <div class="color-input-group">
-                                <input type="color" id="primaryColor" value="#007bff">
-                                <input type="text" id="primaryColorText" value="#007bff" placeholder="#007bff">
+                                <input type="color" id="primaryColor" name="primaryColor" value="#007bff">
+                                <input type="text" id="primaryColorText" name="primaryColorText" value="#007bff" placeholder="#007bff" autocomplete="off">
                             </div>
                             <small>Usada em botões, links e elementos de destaque</small>
                         </div>
@@ -456,8 +440,8 @@
                         <div class="color-group">
                             <label for="successColor">Cor de Sucesso</label>
                             <div class="color-input-group">
-                                <input type="color" id="successColor" value="#28a745">
-                                <input type="text" id="successColorText" value="#28a745" placeholder="#28a745">
+                                <input type="color" id="successColor" name="successColor" value="#28a745">
+                                <input type="text" id="successColorText" name="successColorText" value="#28a745" placeholder="#28a745" autocomplete="off">
                             </div>
                             <small>Usada para tarefas concluídas e ações positivas</small>
                         </div>
@@ -465,8 +449,8 @@
                         <div class="color-group">
                             <label for="warningColor">Cor de Aviso</label>
                             <div class="color-input-group">
-                                <input type="color" id="warningColor" value="#ffc107">
-                                <input type="text" id="warningColorText" value="#ffc107" placeholder="#ffc107">
+                                <input type="color" id="warningColor" name="warningColor" value="#ffc107">
+                                <input type="text" id="warningColorText" name="warningColorText" value="#ffc107" placeholder="#ffc107" autocomplete="off">
                             </div>
                             <small>Usada para tarefas de hoje e alertas</small>
                         </div>
@@ -474,8 +458,8 @@
                         <div class="color-group">
                             <label for="dangerColor">Cor de Perigo</label>
                             <div class="color-input-group">
-                                <input type="color" id="dangerColor" value="#dc3545">
-                                <input type="text" id="dangerColorText" value="#dc3545" placeholder="#dc3545">
+                                <input type="color" id="dangerColor" name="dangerColor" value="#dc3545">
+                                <input type="text" id="dangerColorText" name="dangerColorText" value="#dc3545" placeholder="#dc3545" autocomplete="off">
                             </div>
                             <small>Usada para tarefas atrasadas e ações de exclusão</small>
                         </div>
@@ -491,44 +475,13 @@
                     </div>
                 </div>
 
-                <!-- Notifications Section -->
-                <div class="settings-section">
-                    <h3><i class="fas fa-bell"></i> Notificações</h3>
-                    <div class="settings-group">
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="enableNotifications">
-                            <label for="enableNotifications">Ativar notificações do navegador</label>
-                        </div>
-                        <small>Você receberá notificações quando tarefas estiverem vencendo</small>
-                        
-                        <div class="notification-settings" id="notificationSettings" style="display: none;">
-                            <div class="settings-group">
-                                <label for="notificationTime">Notificar com antecedência</label>
-                                <select id="notificationTime">
-                                    <option value="0">No momento do vencimento</option>
-                                    <option value="15">15 minutos antes</option>
-                                    <option value="30">30 minutos antes</option>
-                                    <option value="60">1 hora antes</option>
-                                    <option value="1440">1 dia antes</option>
-                                </select>
-                            </div>
-                            
-                            <div class="settings-group">
-                                <button class="btn btn-primary" id="testNotificationBtn">
-                                    <i class="fas fa-bell"></i> Testar Notificação
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Display Settings Section -->
                 <div class="settings-section">
                     <h3><i class="fas fa-eye"></i> Configurações de Visualização</h3>
                     <div class="settings-group">
                         <div class="settings-group">
                             <label for="completedTasksDays">Mostrar tarefas concluídas dos últimos</label>
-                            <select id="completedTasksDays">
+                            <select id="completedTasksDays" name="completedTasksDays">
                                 <option value="7">7 dias</option>
                                 <option value="15">15 dias</option>
                                 <option value="30" selected>30 dias</option>
@@ -540,14 +493,13 @@
                     </div>
                 </div>
 
-                <!-- Sort Settings Section -->
                 <div class="settings-section">
                     <h3><i class="fas fa-sort"></i> Configurações de Ordenação</h3>
                     <div class="settings-group">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="sortField">Ordenar tarefas por</label>
-                                <select id="sortField">
+                                <select id="sortField" name="sortField">
                                     <option value="createdAt">Data de Criação</option>
                                     <option value="title">Título</option>
                                     <option value="priority">Prioridade</option>
@@ -559,7 +511,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="sortDirection">Direção</label>
-                                <select id="sortDirection">
+                                <select id="sortDirection" name="sortDirection">
                                     <option value="desc">Decrescente</option>
                                     <option value="asc">Crescente</option>
                                 </select>
@@ -569,7 +521,6 @@
                     </div>
                 </div>
 
-                <!-- Save All Settings -->
                 <div class="settings-save-section">
                     <div class="save-actions">
                         <button class="btn btn-primary btn-large" id="saveAllSettingsBtn">
@@ -582,23 +533,29 @@
                     <small>As configurações são salvas localmente no seu navegador e persistem entre sessões.</small>
                 </div>
 
-                <!-- Data Management Section -->
                 <div class="settings-section">
                     <h3><i class="fas fa-database"></i> Gerenciamento de Dados</h3>
                     <div class="data-actions">
                         <div class="action-group">
                             <h4>Exportar Dados</h4>
                             <p>Baixe um arquivo com todas as suas tarefas, categorias e configurações</p>
-                            <button class="btn btn-primary" id="exportDataBtn">
-                                <i class="fas fa-download"></i> Exportar Dados
-                            </button>
+                            <div class="export-options">
+                                <button class="btn btn-primary" id="exportDataBtn">
+                                    <i class="fas fa-download"></i> Exportar JSON
+                                </button>
+                                <button class="btn btn-secondary" id="exportCsvBtn">
+                                    <i class="fas fa-file-csv"></i> Exportar CSV
+                                </button>
+                            </div>
+                            <small>JSON: Formato completo com metadados | CSV: Compatível com planilhas</small>
                         </div>
 
                         <div class="action-group">
                             <h4>Importar Dados</h4>
                             <p>Carregue um arquivo de backup para restaurar suas tarefas</p>
                             <div class="import-group">
-                                <input type="file" id="importFile" accept=".json" style="display: none;">
+                                <label for="importFile" class="sr-only">Selecionar arquivo de backup</label>
+                                <input type="file" id="importFile" name="importFile" accept=".json" style="display: none;">
                                 <button class="btn btn-secondary" id="selectImportFileBtn">
                                     <i class="fas fa-upload"></i> Selecionar Arquivo
                                 </button>
@@ -606,8 +563,14 @@
                                     <i class="fas fa-file-import"></i> Importar
                                 </button>
                             </div>
-                            <small><strong>Importante:</strong> Use apenas arquivos JSON exportados por esta aplicação. Outros formatos não serão aceitos.</small>
+                            <small><strong>Importante:</strong> Use apenas arquivos JSON exportados por esta aplicação. O sistema valida automaticamente a integridade dos dados antes da importação.</small>
                             <small id="importFileName"></small>
+                            <div id="importValidationInfo" class="validation-info" style="display: none;">
+                                <div class="validation-status">
+                                    <i class="fas fa-check-circle validation-success"></i>
+                                    <span class="validation-text">Arquivo válido - pronto para importação</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="action-group danger-zone">
@@ -620,7 +583,6 @@
                     </div>
                 </div>
 
-                <!-- App Info Section -->
                 <div class="settings-section">
                     <h3><i class="fas fa-info-circle"></i> Informações do App</h3>
                     <div class="app-info">
@@ -636,6 +598,7 @@
         </div>
     </div>
 
+
     <!-- User Guide Modal -->
     <div class="modal" id="guideModal">
         <div class="modal-content guide-modal">
@@ -647,7 +610,6 @@
             </div>
             <div class="modal-body">
                 <div class="guide-container">
-                    <!-- Guide Navigation -->
                     <nav class="guide-nav">
                         <ul class="guide-nav-list">
                             <li><a href="#getting-started" class="guide-nav-link active" data-section="getting-started">
@@ -674,9 +636,7 @@
                         </ul>
                     </nav>
 
-                    <!-- Guide Content -->
                     <div class="guide-content">
-                        <!-- Getting Started Section -->
                         <section id="getting-started" class="guide-section active">
                             <h3><i class="fas fa-play-circle"></i> Começando</h3>
                             <div class="guide-step">
@@ -719,7 +679,6 @@
                             </div>
                         </section>
 
-                        <!-- Tasks Section -->
                         <section id="tasks" class="guide-section">
                             <h3><i class="fas fa-tasks"></i> Gerenciando Tarefas</h3>
                             <div class="guide-step">
@@ -753,7 +712,6 @@
                             </div>
                         </section>
 
-                        <!-- Categories Section -->
                         <section id="categories" class="guide-section">
                             <h3><i class="fas fa-folder"></i> Categorias</h3>
                             <div class="guide-step">
@@ -779,7 +737,6 @@
                             </div>
                         </section>
 
-                        <!-- Tags Section -->
                         <section id="tags" class="guide-section">
                             <h3><i class="fas fa-tags"></i> Tags</h3>
                             <div class="guide-step">
@@ -805,14 +762,12 @@
                             </div>
                         </section>
 
-                        <!-- Filters Section -->
                         <section id="filters" class="guide-section">
                             <h3><i class="fas fa-filter"></i> Filtros e Busca</h3>
                             <div class="guide-step">
                                 <h4>Filtros por Status</h4>
                                 <ul>
                                     <li><strong>Todas:</strong> Mostra todas as tarefas</li>
-                                    <li><strong>Pendentes:</strong> Apenas tarefas não concluídas</li>
                                     <li><strong>Concluídas:</strong> Apenas tarefas finalizadas</li>
                                     <li><strong>Recorrentes:</strong> Tarefas que se repetem</li>
                                 </ul>
@@ -821,9 +776,8 @@
                                 <h4>Filtros por Data</h4>
                                 <ul>
                                     <li><strong>Hoje:</strong> Tarefas para hoje</li>
-                                    <li><strong>Esta Semana:</strong> Tarefas da semana atual</li>
-                                    <li><strong>Este Mês:</strong> Tarefas do mês atual</li>
-                                    <li><strong>Vencidas:</strong> Tarefas atrasadas</li>
+                                    <li><strong>Em Breve:</strong> Tarefas da semana atual</li>
+                                    <li><strong>Atrasadas:</strong> Tarefas atrasadas</li>
                                 </ul>
                             </div>
                             <div class="guide-step" style="border-left-color: #007bff;">
@@ -855,7 +809,6 @@
                             </div>
                         </section>
 
-                        <!-- Settings Section -->
                         <section id="settings" class="guide-section">
                             <h3><i class="fas fa-cog"></i> Configurações</h3>
                             <div class="guide-step">
@@ -867,10 +820,6 @@
                                 <p>Personalize as cores do aplicativo para combinar com seu estilo. Use o botão <strong>"Aplicar Cores"</strong> para testar.</p>
                             </div>
                             <div class="guide-step">
-                                <h4>Notificações</h4>
-                                <p>Configure lembretes diários para revisar suas tarefas.</p>
-                            </div>
-                            <div class="guide-step">
                                 <h4>Configurações de Exibição</h4>
                                 <p>Defina quantos dias de tarefas concluídas devem ser exibidos.</p>
                             </div>
@@ -880,7 +829,7 @@
                                 <ul>
                                     <li><strong>Por data:</strong> Data de criação ou vencimento</li>
                                     <li><strong>Por prioridade:</strong> Alta, média, baixa</li>
-                                    <li><strong>Por status:</strong> Pendentes primeiro</li>
+                                    <li><strong>Por status:</strong> Concluídas por último</li>
                                     <li><strong>Por categoria:</strong> Agrupadas por categoria</li>
                                     <li><strong>Por tags:</strong> Agrupadas por tags</li>
                                     <li><strong>Por título:</strong> Ordem alfabética</li>
@@ -893,7 +842,6 @@
                             </div>
                         </section>
 
-                        <!-- Privacy Section -->
                         <section id="privacy" class="guide-section">
                             <h3><i class="fas fa-shield-alt"></i> Privacidade e Dados</h3>
                             <div class="guide-step">
@@ -901,7 +849,7 @@
                                 <p>Todos os seus dados são armazenados <strong>localmente</strong> no seu navegador. Nada é enviado para servidores externos.</p>
                             </div>
                             <div class="guide-step" style="border-left-color: #28a745;">
-                                <h4><i class="fas fa-download" style="color: #28a745; margin-right: 0.5rem;"></i>✅ Backup dos Dados</h4>
+                                <h4><i class="fas fa-download" style="color: #28a745; margin-right: 0.5rem;"></i>Backup dos Dados</h4>
                                 <p><strong>RECOMENDADO:</strong> Use a função <strong>"Exportar Dados"</strong> nas configurações para fazer backup das suas tarefas, categorias e configurações.</p>
                                 <p>Faça backup <strong>regularmente</strong> para não perder seus dados!</p>
                             </div>
@@ -914,7 +862,7 @@
                                 <p>Seus dados ficam seguros no seu dispositivo. Apenas você tem acesso a eles.</p>
                             </div>
                             <div class="guide-step" style="border-left-color: #dc3545;">
-                                <h4><i class="fas fa-exclamation-triangle" style="color: #dc3545; margin-right: 0.5rem;"></i>⚠️ RESPONSABILIDADE DO USUÁRIO</h4>
+                                <h4><i class="fas fa-exclamation-triangle" style="color: #dc3545; margin-right: 0.5rem;"></i>RESPONSABILIDADE DO USUÁRIO</h4>
                                 <p><strong>IMPORTANTE:</strong> Você é <strong>100% responsável</strong> pelos seus dados! Como o Planno armazena tudo localmente no seu navegador, <strong>apenas você</strong> tem controle sobre eles.</p>
                                 <ul>
                                     <li>Se você limpar o cache do navegador, <strong>perderá todos os dados</strong></li>
@@ -924,7 +872,7 @@
                                 </ul>
                             </div>
                             <div class="guide-step" style="border-left-color: #dc3545;">
-                                <h4><i class="fas fa-trash-alt" style="color: #dc3545; margin-right: 0.5rem;"></i>🚨 CUIDADO: Limpeza de Dados</h4>
+                                <h4><i class="fas fa-trash-alt" style="color: #dc3545; margin-right: 0.5rem;"></i>CUIDADO: Limpeza de Dados</h4>
                                 <p><strong>ATENÇÃO:</strong> A função <strong>"Limpar Todos os Dados"</strong> é <strong>IRREVERSÍVEL</strong>!</p>
                                 <ul>
                                     <li>Você <strong>perderá TODAS</strong> as suas tarefas</li>
@@ -944,7 +892,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <p class="footer-text">
@@ -957,6 +904,40 @@
         </div>
     </footer>
 
+    <script src="src/utils/IdGenerator.js"></script>
+    <script src="src/utils/DateUtils.js"></script>
+    <script src="src/utils/DOMUtils.js"></script>
+    <script src="src/utils/ValidationUtils.js"></script>
+    
+    <script src="src/models/Task.js"></script>
+    <script src="src/models/Category.js"></script>
+    <script src="src/models/Tag.js"></script>
+    
+    <script src="src/services/StorageService.js"></script>
+    <script src="src/services/ExportService.js"></script>
+    
+    <script src="src/filters/TaskFilter.js"></script>
+    <script src="src/filters/SearchFilter.js"></script>
+    
+    <script src="src/ui/TaskRenderer.js"></script>
+    <script src="src/ui/ModalManager.js"></script>
+    <script src="src/ui/SidebarManager.js"></script>
+    <script src="src/ui/SettingsManager.js"></script>
+    <script src="src/ui/GuideManager.js"></script>
+    <script src="src/ui/ToastManager.js"></script>
+    
+    <script src="src/core/EventManager.js"></script>
+    <script src="src/core/StateManager.js"></script>
+    
+    <script src="src/core/TaskController.js"></script>
+    <script src="src/core/CategoryController.js"></script>
+    <script src="src/core/TagController.js"></script>
+    <script src="src/core/FilterController.js"></script>
+    <script src="src/core/RenderController.js"></script>
+    <script src="src/core/SettingsController.js"></script>
+    
+    <script src="src/core/TodoApp.js"></script>
+    
     <script src="script.js"></script>
 </body>
 </html>

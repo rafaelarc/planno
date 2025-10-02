@@ -1,0 +1,373 @@
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    padding: 0;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px var(--shadow);
+    animation: slideIn 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Management Modal Styles */
+.category-management,
+.tag-management {
+    padding: 1.5rem;
+}
+
+.add-category-section,
+.add-tag-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.add-category-section h4,
+.add-tag-section h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.categories-management-list,
+.tags-management-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.management-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.management-item:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--accent-primary);
+}
+
+.management-item-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.management-item-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.management-item-text {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.management-item-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.management-item-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.management-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.management-btn-edit {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+.management-btn-edit:hover {
+    transform: translateY(-1px);
+}
+
+.management-btn-delete {
+    background-color: var(--danger);
+    color: white;
+}
+
+.management-btn-delete:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.category-management,
+.tag-management {
+    padding: 1.5rem;
+}
+
+.add-category-section,
+.add-tag-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.add-category-section h4,
+.add-tag-section h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.category-form,
+.tag-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.category-form .form-row,
+.tag-form .form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.category-form .form-row .form-group,
+.tag-form .form-row .form-group {
+    flex: 1;
+}
+
+.category-form input[type="color"],
+.tag-form input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    background: none;
+}
+
+.categories-list-section h4,
+.tags-list-section h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.categories-management-list,
+.tags-management-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.category-management-item,
+.tag-management-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: var(--bg-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.category-management-item:hover,
+.tag-management-item:hover {
+    background-color: var(--bg-secondary);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.category-info,
+.tag-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.category-management-color,
+.tag-management-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+}
+
+.category-management-name,
+.tag-management-name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.category-usage,
+.tag-usage {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+}
+
+.category-actions,
+.tag-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.category-action-btn,
+.tag-action-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-action-btn:hover,
+.tag-action-btn:hover {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.category-action-btn.edit:hover,
+.tag-action-btn.edit:hover {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.category-action-btn.delete:hover,
+.tag-action-btn.delete:hover {
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.category-action-btn.delete:disabled,
+.tag-action-btn.delete:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.category-action-btn.delete:disabled:hover,
+.tag-action-btn.delete:disabled:hover {
+    color: var(--text-muted);
+    border-color: var(--border-color);
+    background: none;
+}
+
+/* Edit Category/Tag Form */
+.edit-category-form,
+.edit-tag-form {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.edit-category-form input[type="text"],
+.edit-tag-form input[type="text"] {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.edit-category-form input[type="color"],
+.edit-tag-form input[type="color"] {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    background: none;
+}
+
+.edit-category-actions,
+.edit-tag-actions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.edit-category-actions .btn,
+.edit-tag-actions .btn {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    min-width: auto;
+}
