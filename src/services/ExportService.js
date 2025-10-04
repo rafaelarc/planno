@@ -12,7 +12,7 @@
 class ExportService {
     constructor() {
         this.version = '1.0.0';
-        this.appName = 'Planno - To-Do List & Planner';
+        this.appName = 'Planno - Organizador de Tarefas Gratuito';
         this.maxFileSize = 5 * 1024 * 1024; // 5MB
         this.supportedFormats = ['.json', '.csv'];
     }

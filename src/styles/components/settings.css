@@ -363,3 +363,24 @@
     font-size: 0.85rem;
     font-style: italic;
 }
+
+/* Help Actions */
+.help-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.help-actions .btn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.help-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}

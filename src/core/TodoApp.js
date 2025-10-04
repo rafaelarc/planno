@@ -1495,7 +1495,7 @@ class TodoApp {
 
             // Criar tarefas com IDs corretos (silenciosamente)
             this.addTaskSilently({
-                title: 'Bem-vindo ao To-Do Planner!',
+                title: 'Bem-vindo ao Planno!',
                 description: 'Esta é uma tarefa de exemplo. Você pode editá-la ou excluí-la.',
                 category: personalCategory?.id || 'personal',
                 tags: importantTag ? [importantTag.id] : [],

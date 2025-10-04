@@ -1,4 +1,4 @@
-# Planno - To-Do List & Planner
+# Planno - Organizador de Tarefas Gratuito
 
 Uma aplicação web moderna de produtividade para gerenciamento de tarefas e planejamento pessoal, desenvolvida com JavaScript puro, HTML5 e CSS3.
 

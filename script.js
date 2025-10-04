@@ -1,5 +1,3 @@
-// To-Do List & Planner Application - Modularized Version
-
 // Initialize the application
 const app = new TodoApp();
 

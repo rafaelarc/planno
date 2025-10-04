@@ -1,7 +1,7 @@
 {
-  "name": "Planno - To-Do List & Planner",
+  "name": "Planno - Organizador de Tarefas Gratuito",
   "short_name": "Planno",
-  "description": "Organizador de tarefas gratuito e moderno com categorias, tags, filtros combinados e tarefas recorrentes. 100% local e seguro.",
+  "description": "Planno é um organizador de tarefas gratuito, simples. Alternativa ao Todoist e Google Tarefas: crie listas, use tags, filtros e tarefas recorrentes. 100% local e seguro.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
