@@ -121,7 +121,6 @@ class TodoApp {
         
         // Carregar dados e configurar aplicação
         this.loadData();
-        this.checkAndGenerateRecurringTasks();
         this.setupEventListeners();
         this.setupEventDelegation();
         
@@ -153,15 +152,6 @@ class TodoApp {
         this.updateStats();
     }
 
-    /**
-     * Verifica e gera tarefas recorrentes
-     */
-    checkAndGenerateRecurringTasks() {
-        this.taskController.checkAndGenerateRecurringTasks(
-            this.categoryController.getAllCategories(),
-            this.tagController.getAllTags()
-        );
-    }
 
     // ===== TASK MANAGEMENT =====
 

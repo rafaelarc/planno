@@ -109,17 +109,10 @@ class DateUtils {
         if (!task.dueDate || !task.recurrenceType) return null;
         
         const currentDate = this.createLocalDate(task.dueDate);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
         
-        // Para recorrências, usar a data da tarefa como base
-        // mas garantir que a próxima data seja no futuro
-        let baseDate = currentDate;
-        
-        // Se a data da tarefa já passou, usar a data de hoje
-        if (currentDate < today) {
-            baseDate = today;
-        }
+        // Para recorrências, sempre usar a data original da tarefa como base
+        // A próxima recorrência deve seguir o padrão original, não a data atual
+        const baseDate = currentDate;
         
         switch (task.recurrenceType) {
             case 'daily':

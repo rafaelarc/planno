@@ -184,32 +184,6 @@ class TaskController {
         return { success: true, wasCompleted, isNowCompleted: task.completed };
     }
 
-    /**
-     * Verifica e gera tarefas recorrentes
-     * @param {Array} categories - Lista de categorias
-     * @param {Array} tags - Lista de tags
-     */
-    checkAndGenerateRecurringTasks(categories = [], tags = []) {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        this.tasks.forEach(task => {
-            if (task.isRecurring && !task.parentRecurringId) {
-                const taskDate = DateUtils.createLocalDate(task.dueDate);
-                
-                if ((task.completed && taskDate <= today) || (!task.completed && taskDate < today)) {
-                    const hasNextOccurrence = this.tasks.some(t => 
-                        t.parentRecurringId === task.id && 
-                        DateUtils.createLocalDate(t.dueDate) > today
-                    );
-                    
-                    if (!hasNextOccurrence) {
-                        this.generateNextRecurringTask(task, categories, tags);
-                    }
-                }
-            }
-        });
-    }
 
     /**
      * Gera a próxima tarefa recorrente
